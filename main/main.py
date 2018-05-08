@@ -1,3 +1,5 @@
 # -*- encoding:utf-8 -*-
 
-# 分布式相关
+
+class Reptile:
+    pass
