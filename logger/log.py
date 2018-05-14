@@ -4,6 +4,7 @@
 import logging
 import os
 from logging.handlers import TimedRotatingFileHandler
+from logging import StreamHandler
 import time
 from functools import wraps
 
@@ -12,7 +13,8 @@ from functools import wraps
 '''
 
 
-def initLog(name, logLevel=logging.INFO):
+# console 设置是否打印控制台日志
+def initLog(name, logLevel=logging.INFO, console=True):
     log = logging.getLogger(name)
     log.setLevel(logLevel)
 
@@ -25,7 +27,14 @@ def initLog(name, logLevel=logging.INFO):
     fh.setLevel(logLevel)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     fh.setFormatter(formatter)
+
+    # 输出到控制台
+    sh = StreamHandler()
+    sh.setLevel(logLevel)
+    sh.setFormatter(formatter)
     log.addHandler(fh)
+    if console:
+        log.addHandler(sh)
     return log
 
 
@@ -52,10 +61,8 @@ def countTime(log=None):
         @wraps(func)
         def wrapper(*args, **kwargs):
             beginTime = time.time()
-            print(beginTime)
             result = func(*args, **kwargs)
             endTime = time.time()
-            print(endTime)
             costTime = int(endTime * 1000 - beginTime * 1000)
             if log:
                 log.info('%s called cost time : %sms' % (func.__name__, costTime))
@@ -70,11 +77,11 @@ if '__main__' == __name__:
     log.info("测试")
 
 
-    @countTime()
+    @countTime(log)
     def testCountTime():
         for i in range(100000):
-            print(i)
-            # pass
+            # print(i)
+            pass
 
 
     testCountTime()
