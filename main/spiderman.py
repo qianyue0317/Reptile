@@ -5,6 +5,7 @@ from request.urlmanager import UrlManager
 from request.downloader import HtmlDownloader
 from parse.anjukeparser import anjukeparser
 
+
 # 调度
 class SpiderMan(object):
     def __init__(self):
@@ -15,6 +16,7 @@ class SpiderMan(object):
     def setHtmlParser(self, parser):
         self.parser = parser
 
+    # 调度器的入口,需要传入根url
     def start(self, root_url):
         self.urlman.addNew(root_url)
         while self.urlman.hasNewUrl():
@@ -22,7 +24,10 @@ class SpiderMan(object):
             downloader = HtmlDownloader(url)
             htmlContent = downloader.get()
             if self.parser and htmlContent:
-                self.parser.parse(url, htmlContent)
+                urlList = self.parser.parse(url, htmlContent)
+                if urlList:
+                    for newUrl in urlList:
+                        self.urlman.addNew(newUrl)
 
 if '__main__' == __name__:
     man = SpiderMan()
