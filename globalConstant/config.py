@@ -3,8 +3,10 @@
 # 全局配置模块
 
 class Config(object):
+
     def __init__(self):
         self._timeout = 10000
+        self._log = True
         pass
 
     def setTimeout(self,timeout):
@@ -14,6 +16,10 @@ class Config(object):
     # 获取超时时间
     def getTimeout(self):
         return self._timeout
+
+    # 是否打印日志
+    def isLog(self):
+        return self._log
 
 
 config = Config()

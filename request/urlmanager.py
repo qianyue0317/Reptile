@@ -1,4 +1,4 @@
-# -*- utf-8 -*-
+# -*- encoding:utf-8 -*-
 # create by Administrator on 2018/5/14
 # url管理器
 
