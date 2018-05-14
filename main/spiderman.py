@@ -4,6 +4,7 @@
 from request.urlmanager import UrlManager
 from request.downloader import HtmlDownloader
 from parse.anjukeparser import anjukeparser
+from logger.log import log
 
 
 # 调度

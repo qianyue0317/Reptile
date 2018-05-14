@@ -17,42 +17,36 @@ from functools import wraps
 def initLog(name, logLevel=logging.INFO, console=True):
     log = logging.getLogger(name)
     log.setLevel(logLevel)
-
-    logDir = '../log/'
-    logFile = logDir + name + '.log'
-    if os.name is 'nt':  # 如果是windows操作系统
-        if not os.path.exists(logDir):
-            os.mkdir(logDir)
-    fh = TimedRotatingFileHandler(logFile, when='midnight')
-    fh.setLevel(logLevel)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    fh.setFormatter(formatter)
+
+    # 如果name是None就没有本地日志
+    if name is None:
+        logDir = '../log/'
+        logFile = logDir + name + '.log'
+        if os.name is 'nt':  # 如果是windows操作系统
+            if not os.path.exists(logDir):
+                os.mkdir(logDir)
+        fh = TimedRotatingFileHandler(logFile, when='midnight')
+        fh.setLevel(logLevel)
+        fh.setFormatter(formatter)
+        log.addHandler(fh)
 
     # 输出到控制台
     sh = StreamHandler()
     sh.setLevel(logLevel)
     sh.setFormatter(formatter)
-    log.addHandler(fh)
     if console:
         log.addHandler(sh)
     return log
 
 
-# 默认的日志
-_log = initLog("default")
-
-
 class Logger(object):
     def __init__(self, log):
-        self.log = log
+        self._log = log
 
     def info(self, message):
-        if self.log:
-            self.log.info(message)
-
-
-# 如果传入None就是取消日志打印
-log = Logger(_log)
+        if self._log:
+            self._log.info(message)
 
 
 # 计算时间的装饰器
@@ -73,15 +67,25 @@ def countTime(log=None):
     return tmp
 
 
+# 默认的日志
+_log = initLog("default")
+_consoleLog = initLog("console")
+
+# 如果传入None就是取消日志打印
+log = Logger(_log)
+# 只在控制台输出的日志
+consoleLog = Logger(_consoleLog)
+
 if '__main__' == __name__:
-    log.info("测试")
-
-
-    @countTime(log)
-    def testCountTime():
-        for i in range(100000):
-            # print(i)
-            pass
-
-
-    testCountTime()
+    consoleLog.info("测试控制台输出")
+    # log.info("测试")
+    #
+    #
+    # @countTime(log)
+    # def testCountTime():
+    #     for i in range(100000):
+    #         # print(i)
+    #         pass
+    #
+    #
+    # testCountTime()
