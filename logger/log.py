@@ -7,6 +7,10 @@ from logging.handlers import TimedRotatingFileHandler
 import time
 from functools import wraps
 
+'''
+导入此模块的log变量 用其打印日志
+'''
+
 
 def initLog(name, logLevel=logging.INFO):
     log = logging.getLogger(name)
