@@ -9,12 +9,15 @@ import MySQLdb
 class MySQLConnection(object):
     def __init__(self, conn):
         self.conn = conn
-        self.insert_tmpl = r'insert into'
+        self.insert_tmpl = r'insert into %s (date,province,city,country,name,' \
+                           r'address,estate_type,house_type,acreage,price,source,' \
+                           r'ctime,state) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
 
-    def __create_table(self,tableName):
+    def __create_table(self, tableName):
         pass
 
-    def insert(self, tableName, **kwargs):
+    def insertDetail(self, **kwargs):
+        sql = self.insert_tmpl % (kwargs['date'],)
         pass
 
 
