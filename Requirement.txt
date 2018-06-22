@@ -1,0 +1,10 @@
+beautifulsoup4==4.6.0
+bs4==0.0.1
+celery==3.1.25
+celery-with-redis==3.0
+DBUtils==1.2
+lxml==4.0.0
+MySQL-python==1.2.5
+PyMySQL==0.7.11
+redis==2.10.6
+requests==2.17.3

@@ -4,6 +4,6 @@
 
 
 class ReProxy(object):
-    # 返回代理地址 todo
+    # todo 返回代理地址
     def getProxy(self):
         return None
