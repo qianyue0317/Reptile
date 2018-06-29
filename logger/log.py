@@ -46,7 +46,7 @@ class Logger(object):
 
     def info(self, message):
         if self._log:
-            self._log.info(message)
+            self._log.info(str(message) if not isinstance(message, str) else message)
 
 
 # 计算时间的装饰器
