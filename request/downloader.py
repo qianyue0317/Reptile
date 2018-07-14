@@ -25,7 +25,7 @@ class HtmlDownloader(object):
     def get(self, params=None):
         response = requests.get(self.url, params, headers=self.headers, timeout=config.getTimeout())
         if response.status_code is 200:
-            response.status_code = 'UTF-8'
+            response.encoding = 'UTF-8'
             return response.content
         else:
             return None
