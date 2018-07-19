@@ -5,7 +5,6 @@
 import abc
 
 
-
 class StoreMan(object):
     # 全局的实例池子 根据不同的表格
     instance_pool = []

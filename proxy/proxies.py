@@ -37,4 +37,7 @@ def get_ip_list(origin_page=1, page_count=1):
 
 
 if '__main__' == __name__:
-    print(len(get_ip_list(page_count=5)))
+    ip_list = get_ip_list(page_count=5)
+    print(len(ip_list))
+    for ip in ip_list:
+        print(ip)
