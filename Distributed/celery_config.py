@@ -7,13 +7,13 @@ from kombu import Exchange
 
 
 # redis作为消息代理
-BROKER_URL = 'redis://123456@182.61.34.169:6379/0'
+BROKER_URL = 'redis://:123456@182.61.34.169:6379/0'
 
 # rabbitmq作为消息代理
 # BROKER_URL = r'amqp://%s:%s@%s:%s/' % (conf.c_rbmq_celery_user, conf.c_rbmq_celery_passwd, conf.c_rbmq_celery_host, conf.c_rbmq_celery_port)
 
 # 把任务结果存在Redis
-CELERY_RESULT_BACKEND = 'redis://123456@182.61.34.169:6379/1'
+CELERY_RESULT_BACKEND = 'redis://:123456@182.61.34.169:6379/1'
 
 # 引入任务列表
 CELERY_IMPORTS = ('Distributed.tasks',)
