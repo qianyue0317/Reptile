@@ -1,10 +1,14 @@
 # -*- encoding:utf-8 -*-
 # create by qianyue on 2018/5/13
 # 从代理网站抓取代理地址生成列表 代理模块
+
+import random
 import requests
 from bs4 import BeautifulSoup as BS
 import time
 from logger import logger
+
+ip_list = []
 
 
 def get_ip_list(origin_page=1, page_count=1):
@@ -32,8 +36,15 @@ def get_ip_list(origin_page=1, page_count=1):
         except Exception as e:
             logger.info(e)
         # 为防止503错误,间隔两秒请求
-        time.sleep(2)
+        time.sleep(1.5)
     return ip_list
+
+
+def get_random_ip():
+    global ip_list
+    if len(ip_list) == 0:
+        ip_list = get_ip_list()
+    return ip_list[random.randint(0, len(ip_list))]
 
 
 if '__main__' == __name__:

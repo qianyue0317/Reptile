@@ -4,7 +4,7 @@
 import ConfigParser
 
 # 这里应该是全路径 因为别的模块在导入的时候使用相对路径是不准的 根据自己的位置修改
-initFile = r'E:\python\Reptile\globalConstant\conf.ini'
+initFile = r'H:\coding\pythonpro\Reptile\globalConstant\conf.ini'
 
 
 class Config(object):
@@ -24,7 +24,7 @@ class Config(object):
     # 获取超时时间
     def getTimeout(self):
         timeout = self.parser.get('request', 'timeout')
-        return timeout if timeout else 10000
+        return float(timeout) if timeout else float(10000)
 
 
 config = Config()

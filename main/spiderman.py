@@ -3,7 +3,7 @@
 # 调度器
 from request.urlmanager import UrlManager
 from request.downloader import HtmlDownloader
-from parse.anjukeparser import anjukeparser
+from parse.anjuke_parser import anjukeparser
 from logger.log import log
 
 
@@ -30,7 +30,10 @@ class SpiderMan(object):
                     for newUrl in urlList:
                         self.urlman.addNew(newUrl)
 
+
 if '__main__' == __name__:
     man = SpiderMan()
-    man.setHtmlParser(anjukeparser)
-    man.start(r'https://www.baidu.com')
+    # man.setHtmlParser(anjukeparser)
+    # man.start(r'https://www.baidu.com')
+
+

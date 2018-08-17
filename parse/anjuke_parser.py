@@ -4,7 +4,7 @@ from parse.baseparser import HtmlParser
 
 
 # 安居客html解析器
-class Anjukeparser(HtmlParser):
+class anjuke_parser(HtmlParser):
     # 解析之后需要将html中新的url数组返回
     def parse(self, url, htmlcontent):
         # todo 需要写具体的实现
@@ -12,4 +12,4 @@ class Anjukeparser(HtmlParser):
         return []
 
 
-anjukeparser = Anjukeparser()
+anjukeparser = anjuke_parser()
